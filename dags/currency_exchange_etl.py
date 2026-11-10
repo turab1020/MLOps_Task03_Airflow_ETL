@@ -19,6 +19,7 @@ pull uses an explicit `key=` instead of the implicit `return_value` key.
 from __future__ import annotations
 
 import logging
+import os
 from datetime import datetime, timedelta, timezone
 
 import pendulum
@@ -37,7 +38,8 @@ log = logging.getLogger(__name__)
 # ----------------------------------------------------------------------------
 # Configuration
 # ----------------------------------------------------------------------------
-FRANKFURTER_URL = "https://api.frankfurter.dev/v2/rates"
+# Overridable via env var (e.g. to point at a mirror); defaults to the public API.
+FRANKFURTER_URL = os.getenv("FRANKFURTER_API_URL", "https://api.frankfurter.dev/v2/rates")
 MONGO_CONN_ID = "mongo_default"          # defined in airflow_settings.yaml
 MONGO_DB = "currency_db"
 MONGO_COLLECTION = "exchange_rates"
