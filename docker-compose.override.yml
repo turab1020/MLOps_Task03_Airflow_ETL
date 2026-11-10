@@ -1,0 +1,74 @@
+# ---------------------------------------------------------------------------
+# Astro CLI merges this file with its own docker-compose file on `astro dev start`.
+# It adds MongoDB (primary database) and Mongo Express (web admin UI) as extra
+# Docker services, with explicit networking and persistent storage.
+# ---------------------------------------------------------------------------
+
+services:
+
+  mongodb:
+    image: mongo:7.0
+    container_name: currency_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo_admin
+      MONGO_INITDB_ROOT_PASSWORD: mongo_pass_23L0995
+      MONGO_INITDB_DATABASE: currency_db
+    ports:
+      - "27017:27017"                 # host:container (for Compass / mongosh on the host)
+    volumes:                          # ---- Persistent storage ----
+      - mongo_data:/data/db           #   database files survive `astro dev stop/restart`
+      - mongo_config:/data/configdb   #   replica-set / config metadata
+    networks:                         # ---- Docker networking ----
+      - airflow                       #   Astro's network -> scheduler/workers reach host "mongodb"
+      - mongo_net                     #   private network shared with mongo-express
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    labels:
+      com.mlops.task: "task3-airflow-etl"
+      com.mlops.role: "primary-database"
+      com.mlops.owner: "23L0995"
+
+  mongo-express:
+    image: mongo-express:1.0.2
+    container_name: currency_mongo_express
+    restart: unless-stopped
+    depends_on:
+      mongodb:
+        condition: service_healthy    # start only after MongoDB answers ping
+    environment:
+      # "mongodb" resolves through Docker DNS on mongo_net (service name, not localhost)
+      ME_CONFIG_MONGODB_URL: mongodb://mongo_admin:mongo_pass_23L0995@mongodb:27017/?authSource=admin
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH: "true"
+      ME_CONFIG_BASICAUTH_ENABLED: "true"
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin123
+    ports:
+      - "8081:8081"                   # Mongo Express UI -> http://localhost:8081
+    networks:
+      - mongo_net
+    labels:
+      com.mlops.task: "task3-airflow-etl"
+      com.mlops.role: "database-admin-ui"
+      com.mlops.owner: "23L0995"
+
+networks:
+  airflow:                            # network created by the Astro CLI (re-declared to join it)
+    driver: bridge
+  mongo_net:                          # dedicated bridge network for the database tier
+    driver: bridge
+    labels:
+      com.mlops.task: "task3-airflow-etl"
+
+volumes:
+  mongo_data:                         # named volumes managed by Docker
+    labels:
+      com.mlops.task: "task3-airflow-etl"
+  mongo_config:
+    labels:
+      com.mlops.task: "task3-airflow-etl"

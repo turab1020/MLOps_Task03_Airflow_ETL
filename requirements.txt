@@ -1,0 +1,4 @@
+# Astro project Python dependencies (installed into the Astro Runtime image)
+apache-airflow-providers-mongo>=5.0.0
+pymongo>=4.6
+requests>=2.31

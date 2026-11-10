@@ -1,0 +1,16 @@
+# Loaded automatically by `astro dev start` (local development only).
+airflow:
+  connections:
+    - conn_id: mongo_default
+      conn_type: mongo
+      conn_host: mongodb            # Docker service name on the shared "airflow" network
+      conn_schema: currency_db
+      conn_login: mongo_admin
+      conn_password: mongo_pass_23L0995
+      conn_port: 27017
+      conn_extra:
+        srv: false
+        ssl: false
+        authSource: admin
+  pools: []
+  variables: []
