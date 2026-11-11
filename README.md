@@ -325,6 +325,7 @@ cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow && astro dev stop
 | `astro: command not found` | Run `brew install astro`, then open a new Terminal window. |
 | `Error: not an Astro project` | You are in the wrong folder: run the `cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow` part first. |
 | Chrome shows `ERR_TOO_MANY_RETRIES` on port 8081 | A Chrome extension is blocking it: use Safari or an Incognito window at http://127.0.0.1:8081. |
+| `astro dev pytest`: `PermissionError: [Errno 13] Permission denied` on a file | Run `chmod -R a+rX .` in the project folder, then rerun the tests. |
 | Mongo Express shows *waiting for MongoDB* | Wait ~20 s for the MongoDB healthcheck, then refresh. |
 
 ---
