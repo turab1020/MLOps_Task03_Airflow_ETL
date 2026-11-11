@@ -114,6 +114,12 @@ cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow && clear && find . -not -p
 cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow && code .
 ```
 
+If it says `command not found: code`, use this instead (opens the VS Code app directly):
+
+```bash
+cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow && open -a "Visual Studio Code" .
+```
+
 | Slot | File | What to show |
 |------|------|--------------|
 | S3 | `dags/currency_exchange_etl.py` | `extract_exchange_rates` task (named `xcom_push`) |
