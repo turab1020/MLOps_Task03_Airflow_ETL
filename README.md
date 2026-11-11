@@ -57,7 +57,7 @@ Transformed document schema:
 
 | Service       | URL                    | Login                                                  |
 |---------------|------------------------|--------------------------------------------------------|
-| Airflow UI    | http://localhost:8080  | admin / admin (Astro default)                          |
+| Airflow UI    | the URL `astro dev start` prints, e.g. http://currency-etl-airflow.localhost:6563 | none locally (or admin / admin if asked) |
 | Mongo Express | http://localhost:8081  | admin / admin123                                       |
 | MongoDB       | localhost:27017        | mongo_admin / mongo_pass_23L0995 (authSource = admin)  |
 
@@ -175,7 +175,7 @@ clear && docker volume ls --filter name=mongo && echo && echo "Mounts:" && docke
 
 ### Phase 4 — Run the DAG (browser)
 
-1. Open **http://localhost:8080** and log in (admin / admin).
+1. Open the **Airflow UI URL printed by `astro dev start`** (e.g. http://currency-etl-airflow.localhost:6563). Log in with admin / admin only if it asks.
 2. Find **currency_exchange_etl** and switch its toggle **on** (unpause).
 
 📸 **Screenshot S13** ✅: the DAG list showing `currency_exchange_etl`, its tags and its schedule.
@@ -315,7 +315,7 @@ cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow && astro dev stop
 | Problem | Fix |
 |---------|-----|
 | `Cannot connect to the Docker daemon` | Open Docker Desktop and wait until it says *Running*. |
-| `port 8080 / 8081 / 27017 is already allocated` | Stop the other app using that port, or run `docker ps` and stop the old container. |
+| `port 8081 / 27017 is already allocated` | Stop the other app using that port, or run `docker ps` and stop the old container. |
 | `astro: command not found` | Run `brew install astro`, then open a new Terminal window. |
 | `Error: not an Astro project` | You are in the wrong folder: run the `cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow` part first. |
 | Mongo Express shows *waiting for MongoDB* | Wait ~20 s for the MongoDB healthcheck, then refresh. |
