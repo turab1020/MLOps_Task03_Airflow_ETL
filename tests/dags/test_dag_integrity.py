@@ -18,7 +18,7 @@ def test_no_import_errors(dagbag):
 
 
 def test_dag_has_three_tasks_in_order(dagbag):
-    dag = dagbag.get_dag(DAG_ID)
+    dag = dagbag.dags.get(DAG_ID)
     assert dag is not None
     extract = dag.get_task("extract_exchange_rates")
     transform = dag.get_task("transform_exchange_rates")
@@ -29,7 +29,7 @@ def test_dag_has_three_tasks_in_order(dagbag):
 
 
 def test_dag_is_scheduled_daily_with_retries(dagbag):
-    dag = dagbag.get_dag(DAG_ID)
+    dag = dagbag.dags.get(DAG_ID)
     assert dag.catchup is False
     for t in dag.tasks:
         assert t.retries >= 1
