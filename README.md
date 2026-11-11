@@ -58,7 +58,7 @@ Transformed document schema:
 | Service       | URL                    | Login                                                  |
 |---------------|------------------------|--------------------------------------------------------|
 | Airflow UI    | the URL `astro dev start` prints, e.g. http://currency-etl-airflow.localhost:6563 | none locally (or admin / admin if asked) |
-| Mongo Express | http://localhost:8081  | admin / admin123                                       |
+| Mongo Express | http://127.0.0.1:8081  | admin / admin123                                       |
 | MongoDB       | localhost:27017        | mongo_admin / mongo_pass_23L0995 (authSource = admin)  |
 
 ---
@@ -209,7 +209,13 @@ cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow && astro dev run dags trig
 
 ### Phase 5 — Verify the data in MongoDB
 
-**Mongo Express (browser):** open **http://localhost:8081** and log in (admin / admin123).
+**Mongo Express (browser):** open it in Safari (Chrome extensions can block it with `ERR_TOO_MANY_RETRIES`), then log in with admin / admin123:
+
+📂 **Run in:** any folder
+
+```bash
+open -a Safari http://127.0.0.1:8081
+```
 
 📸 **Screenshot S21** ✅: the database list showing `currency_db`.
 
@@ -318,6 +324,7 @@ cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow && astro dev stop
 | `port 8081 / 27017 is already allocated` | Stop the other app using that port, or run `docker ps` and stop the old container. |
 | `astro: command not found` | Run `brew install astro`, then open a new Terminal window. |
 | `Error: not an Astro project` | You are in the wrong folder: run the `cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow` part first. |
+| Chrome shows `ERR_TOO_MANY_RETRIES` on port 8081 | A Chrome extension is blocking it: use Safari or an Incognito window at http://127.0.0.1:8081. |
 | Mongo Express shows *waiting for MongoDB* | Wait ~20 s for the MongoDB healthcheck, then refresh. |
 
 ---
