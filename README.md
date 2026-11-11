@@ -104,9 +104,9 @@ clear && astro version && docker --version && docker compose version
 cd ~/Downloads/FAST/MLOps/TASK03/currency-etl-airflow && clear && find . -not -path "./.git*" -not -path "*/__pycache__*" | sort
 ```
 
-📸 **Screenshot S2** ✅: the file list.
+📸 **Screenshot S2** ✅: one screenshot of this file list. You do **not** screenshot each file in it.
 
-**Code screenshots (S3–S8) ✅**: open the project in VS Code and screenshot the files listed in the report:
+**Code screenshots (S3–S8) ✅ already in the report, so this is optional.** Only these 6 slots need code screenshots, not every file. To retake them in your own editor, open the project in VS Code:
 
 📂 **Run in:** `TASK03/currency-etl-airflow`
 
