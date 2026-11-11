@@ -31,7 +31,7 @@ services:
     labels:
       com.mlops.task: "task3-airflow-etl"
       com.mlops.role: "primary-database"
-      com.mlops.owner: "23L0995"
+      com.mlops.owner: "23L-0995"
 
   mongo-express:
     image: mongo-express:1.0.2
@@ -55,7 +55,7 @@ services:
     labels:
       com.mlops.task: "task3-airflow-etl"
       com.mlops.role: "database-admin-ui"
-      com.mlops.owner: "23L0995"
+      com.mlops.owner: "23L-0995"
 
 networks:
   airflow:                            # network created by the Astro CLI (re-declared to join it)

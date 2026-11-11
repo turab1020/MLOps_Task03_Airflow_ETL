@@ -1,6 +1,6 @@
 # Currency Exchange-Rate ETL with Apache Airflow (Astro CLI) → MongoDB
 
-MLOps Task 3 · 23L0995
+MLOps Task 3 · 23L-0995
 
 A daily Airflow pipeline, built with the **Astro CLI**, that pulls currency exchange rates from the
 **Frankfurter API**, reshapes them into a fixed document schema and loads them into **MongoDB**.

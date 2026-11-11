@@ -54,7 +54,7 @@ TASK_TRANSFORM = "transform_exchange_rates"
 TASK_LOAD = "load_exchange_rates"
 
 default_args = {
-    "owner": "23L0995",
+    "owner": "23L-0995",
     "retries": 3,
     "retry_delay": timedelta(minutes=2),
     "retry_exponential_backoff": True,
